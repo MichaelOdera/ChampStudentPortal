@@ -16,20 +16,20 @@
 
             <div id="landing-div-login" class="col-md-6">
                 <!-- Default form login -->
-                <form class="text-center" id="login-form" action="#!">
+                <form class="text-center" id="login-form"  #myform="ngForm" (ngSubmit)="login(myform)">
 
                     <p class="h4 mb-4">Sign in</p>
 
                     <!-- Email -->
                     <!-- <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail"> -->
                     <div class="formGroup">
-                        <input type="email" id="name" name="email" class="form-control" placeholder="Email..." #email required>
+                        <input type="email" id="name" name="email" class="form-control" placeholder="Email..."  ngModel required>
                     </div>
 
                     <!-- Password -->
                     <div class="formGroup">
                         <input type="password" id="defaultLoginFormPassword" class="form-control mb-4"
-                        placeholder="Password" #password required>
+                        placeholder="Password"  ngModel required>
                     </div>
                     
 
@@ -47,7 +47,7 @@
                     </div>
 
                     <!-- Sign in button -->
-                    <button class="btn btn-info btn-block my-4" (click)="authenticationService.SignIn(email.value, password.value)">Sign in</button>
+                    <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
 
                     <!-- Register -->
                     <p>Not yet Registered?

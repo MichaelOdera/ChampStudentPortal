@@ -12,6 +12,7 @@ import * as firebase from 'firebase/app';
 })
 export class AuthenticationService {
   userData: any;
+  user : firebase.User;
 
   constructor( public afAuth: AngularFireAuth, public afs: AngularFirestore, public router : Router, public ngZone : NgZone) {
     this.afAuth.authState.subscribe(user => {
@@ -35,6 +36,9 @@ export class AuthenticationService {
       }, err => reject(err))
     })
   }
+  
+ 
+ 
  
 
   SignIn(email, password) {

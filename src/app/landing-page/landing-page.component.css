@@ -1,5 +1,5 @@
 #landing-div{
-    margin: 7%;
+    margin: 4%;
     padding: 1%;
     background-color: rgba(0, 0, 0, 0.4);
     text-align: center;
@@ -26,6 +26,26 @@
     padding: 15px;
     font-variant: small-caps;
 }
+
+
+#landing-div-login input[type=password], #landing-div-login input[type=email],#landing-div-login input[type=text]{
+    width: 93%;
+    border-bottom: 2px solid white;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    background: none;
+    margin: 30px;
+    padding: 15px;
+    color: white;
+    text-decoration-color: seashell;
+    outline: none;
+}
+
+input[type=password]:focus, input[type=email]:focus, input[type=text]:focus{
+    outline: none;
+}
+
 
 
 #login-form{
@@ -60,6 +80,16 @@ section input[type=text], section input[type=email] {
 
 .fa {
     font-size: 56px;
+
+}
+
+.fa-arrow-circle-down{
+    margin-bottom: 4px;
+}
+.fa-arrow-circle-down:hover{
+    color: grey;
+    cursor: pointer;
+
 }
 
 h3{

@@ -1,0 +1,70 @@
+#landing-div{
+    margin: 7%;
+    padding: 1%;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    border-radius: 20px;
+}
+
+#landing-div-overlay{
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: medium;
+}
+
+#landing-div-header{
+    margin: 3%;
+}
+
+#landing-div-header h1{
+    font-size: 30px;
+    text-decoration: underline;
+}
+
+#landing-div-instructions p{
+    font-weight: 400;
+    padding: 15px;
+    font-variant: small-caps;
+}
+
+
+#login-form{
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 2%;
+    border-radius: 25px;
+}
+
+#login-form a{
+    color: #b3e1ee;
+}
+
+#landing-div-inquiries {
+    margin-top: 2%;
+}
+
+section {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 3%;
+}
+
+
+section input[type=text], section input[type=email] {
+    color: white;
+    margin: 2%;
+}
+
+#login-form .formGroup{
+    margin-top: 2%;
+    padding: 4px;
+}
+
+.fa {
+    font-size: 56px;
+}
+
+h3{
+    font-weight: 400;
+    font-style: italic;
+
+}
+

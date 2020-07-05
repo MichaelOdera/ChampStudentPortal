@@ -1,0 +1,164 @@
+<ng-progress></ng-progress>
+<div id="landing-div">
+    <div id="landing-div-overlay">
+        <div id="landing-div-header">
+            <i class="fa fa-university" aria-hidden="true"></i>
+            <h1>Champion's School Dashboard</h1>
+        </div>
+        <div id="landing-div-content" class="row">
+
+            <div id="landing-div-instructions" class="col-md-6">
+                <p>You will be required to enter the results of your respective subjects, after which,
+                    the final grade average will be displayed and the rank you have attained will be calculated
+                    and posted on your dashboard.
+                </p>
+            </div>
+
+            <div id="landing-div-login" class="col-md-6">
+                <!-- Default form login -->
+                <form class="text-center" id="login-form" action="#!">
+
+                    <p class="h4 mb-4">Sign in</p>
+
+                    <!-- Email -->
+                    <!-- <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail"> -->
+                    <div class="formGroup">
+                        <input type="email" id="name" name="email" class="form-control" placeholder="Email..." #email required>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="formGroup">
+                        <input type="password" id="defaultLoginFormPassword" class="form-control mb-4"
+                        placeholder="Password" #password required>
+                    </div>
+                    
+
+                    <div class="d-flex justify-content-around">
+                        <div>
+                            <!-- Remember me -->
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                            </div>
+                        </div>
+                        <div>
+                            <!-- Forgot password -->
+                            <a href="">Forgot password?</a>
+                        </div>
+                    </div>
+
+                    <!-- Sign in button -->
+                    <button class="btn btn-info btn-block my-4" (click)="authenticationService.SignIn(email.value, password.value)">Sign in</button>
+
+                    <!-- Register -->
+                    <p>Not yet Registered?
+                        <a routerLink="/registration">Sign Up</a>
+                    </p>
+
+                </form>
+                <!-- Default form login -->
+
+            </div>
+        </div>
+        <hr>
+        <div id="landing-div-inquiries" class="text-center">
+            <p class="text-centre">CLICK TO SUBMIT YOUR INQUIRY</p>
+            <i class="fa fa-arrow-circle-down" style="font-size:36px" @myInsertRemoveTrigger
+                (click)=toggleDisplayDiv()></i>
+            <!--Section: Contact v.2-->
+
+            <section class="mb-4" *ngIf="isShowDiv">
+                <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col-md-9 mb-md-0 mb-5">
+                        <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+
+                            <!--Grid row-->
+                            <div class="row">
+
+                                <!--Grid column-->
+                                <div class="col-md-6">
+                                    <div class="md-form mb-0">
+                                        <input type="text" id="name" name="name" class="form-control">
+                                        <label for="name" class="">Your name</label>
+                                    </div>
+                                </div>
+                                <!--Grid column-->
+
+                                <!--Grid column-->
+                                <div class="col-md-6">
+                                    <div class="md-form mb-0">
+                                        <input type="email" id="email" name="email" class="form-control">
+                                        <label for="email" class="">Your email</label>
+                                    </div>
+                                </div>
+                                <!--Grid column-->
+
+                            </div>
+                            <!--Grid row-->
+
+                            <!--Grid row-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="md-form mb-0">
+                                        <input type="text" id="subject" name="subject" class="form-control">
+                                        <label for="subject" class="">Subject</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Grid row-->
+
+                            <!--Grid row-->
+                            <div class="row">
+
+                                <!--Grid column-->
+                                <div class="col-md-12">
+
+                                    <div class="md-form">
+                                        <textarea type="text" id="message" name="message" rows="2"
+                                            class="form-control md-textarea"></textarea>
+                                        <label for="message">Your message</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--Grid row-->
+
+                        </form>
+
+                        <div class="text-center text-md-left">
+                            <a class="btn btn-primary"
+                                onclick="document.getElementById('contact-form').submit();">Send</a>
+                        </div>
+                        <div class="status"></div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-3 text-center">
+                        <ul class="list-unstyled mb-0">
+                            <li><i class="fas fa-map-marker-alt fa-2x"></i>
+                                <p>San Francisco, CA 94126, USA</p>
+                            </li>
+
+                            <li><i class="fas fa-phone mt-4 fa-2x"></i>
+                                <p>+ 01 234 567 89</p>
+                            </li>
+
+                            <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+                                <p>schoolset@finbooks.com</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+
+            </section>
+            <!--Section: Contact v.2-->
+
+
+        </div>
+    </div>
+</div>
+

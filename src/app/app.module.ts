@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { environment } from '../environments/environment';
 
 import { NgProgressModule } from '@ngx-progressbar/core';
@@ -23,6 +24,8 @@ import { StudentDashBoardComponent } from './student-dash-board/student-dash-boa
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AuthenticationService } from './authentication.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { from } from 'rxjs';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 
 @NgModule({
@@ -32,7 +35,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     LoginComponent,
     StudentDashBoardComponent,
     LandingPageComponent,
-    NavbarComponent
+    NavbarComponent,
+    NotfoundComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -41,6 +45,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    AngularFireDatabaseModule,
     FormsModule,
     ReactiveFormsModule,
     NgProgressModule.forRoot(),

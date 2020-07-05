@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
+import { FirebaseUserModel } from '../FirebaseUserModel';
 
 @Component({
   selector: 'app-registration',
@@ -12,7 +13,11 @@ export class RegistrationComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
 
-  constructor(public authService: AuthenticationService) { }
+  user : FirebaseUserModel;
+
+  constructor(public authService: AuthenticationService) { 
+    this.user = new FirebaseUserModel("", "");
+  }
 
   register(form){
     this.authService.SignUp(form.value)

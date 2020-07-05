@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseUserModel } from '../FirebaseUserModel';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-student-dash-board',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentDashBoardComponent implements OnInit {
 
-  constructor() { }
+  user: FirebaseUserModel;
+  username: string;
+
+  constructor(public authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.authenticationService.getUserProfile()
+    this.user = this.authenticationService.firebaseuser
+    this.username = this.user.name
   }
 
 }

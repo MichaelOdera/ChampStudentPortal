@@ -32,6 +32,10 @@ export class LandingPageComponent implements OnInit {
     this.isShowDiv = !this.isShowDiv;
   }
 
+  login(value){
+    this.authenticationService.SignIn(value);
+  }
+
 
   ngOnInit(): void {
   }

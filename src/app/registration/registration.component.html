@@ -6,18 +6,27 @@
       <div class="form-field">
         <label><i class="fa fa-user" aria-hidden="true"></i></label>
             <label class="user" for="register-username"><span class="hidden">Name</span></label>
-            <input name="name" id="register-username" type="text" class="form-input" placeholder="Name" ngModel required>
+            <input name="name" id="register-username" type="text" class="form-input" placeholder="Name" #name='ngModel' ngModel required>
+            <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+              <p style="color: black;">Name is required</p>
+            </div>
       </div>
       <div class="form-field">
         <label><i class="fa fa-envelope" aria-hidden="true"></i></label>
         <label class="user" for="register-email"><span class="hidden">Email</span></label>
-        <input name="email" id="register-email" type="email" class="form-input" placeholder="Email" ngModel required>
+        <input name="email" id="register-email" type="email" class="form-input" placeholder="Email" #email='ngModel' ngModel required>
+        <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+          <p style="color: black;">Email is required</p>
+        </div>
       </div>
 
       <div class="form-field">
         <label><i class="fa fa-key" aria-hidden="true"></i></label>
         <label class="lock" for="register-password"><span class="hidden">Password</span></label>
-        <input name="password" id="register-password" type="password" class="form-input" placeholder="Password" ngModel required>
+        <input name="password" id="register-password" type="password" class="form-input" placeholder="Password" #password='ngModel' ngModel required>
+        <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+          <p style="color: black;">Email is required</p>
+        </div>
       </div>
 
       <div class="form-field">

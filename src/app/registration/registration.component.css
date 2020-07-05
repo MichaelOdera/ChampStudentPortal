@@ -1,10 +1,71 @@
-section {
-    margin: auto;
+
+.register-item{
+    margin-top: 40px;
 }
 
-.main {
-    margin: 15px;
-    text-align: center;
-
+form {
+    margin-top: 40px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 6%;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
+input[type=password], input[type=email], input[type=text]{
+    width: 93%;
+    border-bottom: 2px solid white;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    background: none;
+    margin: 30px;
+    padding: 15px;
+    color: white;
+    text-decoration-color: seashell;
+}
+
+
+input[type=password]:focus, input[type=email]:focus, input[type=text]:focus{
+    outline: none;
+}
+
+.btn-info {
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+::placeholder {
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:white;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+   color: rgb(168, 157, 157);
+  }
+
+
+  .fa{
+      color: white;
+      font-size: 20px;
+  }
+
+  p {
+      color: white;
+  }
+
+  a {
+      color: rgb(168, 157, 157);
+  }
+
+  a:hover {
+      color: darkseagreen;
+  }

@@ -13,27 +13,27 @@ import { Router } from '@angular/router';
 export class StudentDashBoardComponent implements OnInit {
 
   userProfile: any;
-  name: string;
+  userEmail: string;
+  userData: any;
   user: firebase.User;
+  userUid: any;
   displayProfile : FirebaseUserModel;
+  key1: string;
+
+  
+  
 
   constructor( public authService: AuthenticationService, private router: Router, public afauth: AngularFireAuth) { 
-    this.userProfile = ""
-    //this.userDisplayName = this.router.getCurrentNavigation().extras.state.example; 
-    this.afauth.onAuthStateChanged(user => {
-        firebase.database().ref('users/'+user.uid).once("value", snap=>{
-          console.log(snap.val())
-          this.userProfile = snap.val().name
-          console.log("My User Name"+this.userProfile) 
-        })
-    })
+   
+
    }
 
+
+
   ngOnInit(): void {
-    this.afauth.currentUser.then(person =>{
-      this.name = person.email
-    })
    
   }
+
+  
 
 }

@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {NgxWebstorageModule, LocalStorageService} from 'ngx-webstorage';
 import { NgModule } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StorageServiceModule } from 'ngx-webstorage-service';
 
 
 import { AngularFireModule } from "@angular/fire";
@@ -50,9 +52,11 @@ import { NotfoundComponent } from './notfound/notfound.component';
     ReactiveFormsModule,
     NgProgressModule.forRoot(),
     NgProgressHttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    NgxWebstorageModule.forRoot(),
+    StorageServiceModule
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, LocalStorageService],
   bootstrap: [AppComponent]
  
 })

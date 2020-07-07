@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
-import { FirebaseUserModel } from './FirebaseUserModel';
+import { Observable } from 'rxjs/Observable';
 
 
 
@@ -13,10 +13,13 @@ import { FirebaseUserModel } from './FirebaseUserModel';
 })
 export class AuthenticationService {
   userData: any;
-  user : firebase.User;
-  name: String;
+  user : Observable<firebase.User>;
+
+
+  userDisplay : string;
+
  
-  firebaseuser: FirebaseUserModel;
+  
   defaultDatabase: firebase.database.Database;
 
   get isLoggedIn(): boolean {
@@ -26,7 +29,6 @@ export class AuthenticationService {
 
 
   constructor( public afAuth: AngularFireAuth, public afs: AngularFirestore, public router : Router, public ngZone : NgZone) {
-    this.firebaseuser = new FirebaseUserModel("", "");
 
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -39,6 +41,20 @@ export class AuthenticationService {
       }
     })
    }
+
+
+  fetchUserName(){
+      this.afAuth.onAuthStateChanged(user => {    
+        firebase.database().ref('users/' + user.uid).once("value", snap => {
+        //console.log(snap.val().name)
+        this.userDisplay = snap.val().name
+        console.log(this.userDisplay)
+      }).then(res =>{
+        console.log(res.val().name)
+      })
+    })  
+  }
+
 
  
 
@@ -55,7 +71,7 @@ export class AuthenticationService {
           displayName: value.name
         }).then(res => {
           this.writeUserData(newuser)
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard'], { state: { example: newuser.name } });
           resolve(res);
         })
         
@@ -65,7 +81,7 @@ export class AuthenticationService {
   } 
 
   writeUserData(newuser: { name: string; uid: string; email: string; }) {
-    firebase.database().ref("/users"+ newuser.uid).set(newuser).catch( error =>
+    firebase.database().ref("users/"+ newuser.uid).set(newuser).catch( error =>
       console.log("Error message " + error.message));
   }
 
@@ -93,27 +109,7 @@ export class AuthenticationService {
   }
 
 
-  getUserProfile() {      
-    let promise = new Promise((resolve, reject) => {
-        this.afAuth.currentUser
-            .then(res => {
-                if (res.providerData[0].providerId == 'password') {
-                    this.firebaseuser.name = res.displayName;
-                    this.firebaseuser.provider = res.providerData[0].providerId;
-                    return resolve(this.user);
-                }
-                else {
-                    this.firebaseuser.name = res.displayName;
-                    this.firebaseuser.provider = res.providerData[0].providerId;
-                    return resolve(this.user);
-                }
-            }, err => {
-                this.router.navigate(['login']);
-                return reject(err);
-            })
-    })
-    return promise;
-}
+  
 }
 
 

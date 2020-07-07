@@ -15,8 +15,11 @@ export class AuthenticationService {
   userData: any;
   user : Observable<firebase.User>;
 
+  details: any;
+
 
   userDisplay : string;
+  userProfileName: string;
 
  
   
@@ -43,16 +46,16 @@ export class AuthenticationService {
    }
 
 
-  fetchUserName(){
-      this.afAuth.onAuthStateChanged(user => {    
-        firebase.database().ref('users/' + user.uid).once("value", snap => {
-        //console.log(snap.val().name)
-        this.userDisplay = snap.val().name
-        console.log(this.userDisplay)
-      }).then(res =>{
-        console.log(res.val().name)
-      })
-    })  
+  getUserDetails(){
+    this.userProfileName = ""
+    //this.userDisplayName = this.router.getCurrentNavigation().extras.state.example; 
+    return this.afAuth.onAuthStateChanged(user => {
+        firebase.database().ref('users/'+user.uid).once("value", snap=>{
+          console.log(snap.val())
+          this.userData =  snap.val()
+          console.log("My User Name"+this.userProfileName) 
+        })
+    })
   }
 
 
@@ -60,6 +63,7 @@ export class AuthenticationService {
 
   SignUp(value) {
     return new Promise<any>((resolve, reject) => {
+  
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
       .then(success => {
         var newuser = {
@@ -71,6 +75,7 @@ export class AuthenticationService {
           displayName: value.name
         }).then(res => {
           this.writeUserData(newuser)
+          
           this.router.navigate(['/dashboard'], { state: { example: newuser.name } });
           resolve(res);
         })

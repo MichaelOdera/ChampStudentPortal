@@ -2,3 +2,49 @@ img {
     height: 70px;
     width: 70px;
 }
+
+#individual-grades {
+    padding: 5px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.col-md-9 *{
+    padding: 3px;
+}
+
+#portfolio{
+    color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 3%;
+}
+
+#grades{
+    background-color: rgba(0, 0, 0, 0.2);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+}
+
+.first-subject, .second-subject, .third-subject, .fourth-subject,.fifth-subject, .sixth-subject, .seventh-subject {
+    margin-top: 30px;
+}
+
+form{
+    margin-left: 50px;
+    padding: 20px
+}
+
+.btn-xlg{
+    margin-top: 20px;
+}
+
+tr{
+    margin-top: 40px;
+}
+
+table {
+    font-size: 30px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 40px;
+
+}

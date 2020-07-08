@@ -21,24 +21,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
-import { LoginComponent } from './login/login.component';
 import { StudentDashBoardComponent } from './student-dash-board/student-dash-board.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AuthenticationService } from './authentication.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { from } from 'rxjs';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { SuccessComponent } from './success/success.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
-    LoginComponent,
     StudentDashBoardComponent,
     LandingPageComponent,
     NavbarComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    SuccessComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

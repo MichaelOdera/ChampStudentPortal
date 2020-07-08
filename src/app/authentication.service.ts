@@ -63,7 +63,6 @@ export class AuthenticationService {
 
   SignUp(value) {
     return new Promise<any>((resolve, reject) => {
-  
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
       .then(success => {
         var newuser = {

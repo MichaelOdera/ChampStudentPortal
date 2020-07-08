@@ -19,6 +19,8 @@ export class RegistrationComponent implements OnInit {
     this.user = new FirebaseUserModel("", "");
   }
 
+  
+
   register(form){
     this.authService.SignUp(form.value)
     .then(res => {
@@ -27,7 +29,6 @@ export class RegistrationComponent implements OnInit {
       this.successMessage = "Your account has been created";
     }, err => {
       console.log(err);
-      alert("Ensure that your password has at least six characters");
       this.errorMessage = err.message;
       this.successMessage = "";
     })

@@ -1,8 +1,12 @@
 <div class="container">
   <div class="logo">Create a new account!</div>
   <div class="register-item">
-    <form #myform="ngForm" (ngSubmit)="register(myform)" class="form form-register">
+    <form #myform="ngForm" (ngSubmit)="register(myform)" class="mdb-form form-register">
+      <div class="text-end" style="width: 100%;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSWCPSXn9DneOl1Nnz9UPk6igYnvmswguG09A&usqp=CAU" style="height: 100px; width: 100px">
 
+      </div>
+      
       <div class="form-field">
         <label><i class="fa fa-user" aria-hidden="true"></i></label>
             <label class="user" for="register-username"><span class="hidden">Name</span></label>
@@ -25,12 +29,12 @@
         <label class="lock" for="register-password"><span class="hidden">Password</span></label>
         <input name="password" id="register-password" type="password" class="form-input" placeholder="Password" #password='ngModel' ngModel required>
         <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-          <p style="color: black;">Email is required</p>
+          <p style="color: black;">Email is required or {{errorMessage}}</p>
         </div>
       </div>
 
       <div class="form-field">
-        <input class="btn-info" type="submit" value="Register">
+        <input class="btn-info" type="submit" value="Register"  mat-raised-button>
         <p>Already have an Account? <a routerLink="/landing">Sign in Here</a></p>
       </div>
     </form>

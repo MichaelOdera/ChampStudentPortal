@@ -5,6 +5,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { StudentDashBoardComponent } from './student-dash-board/student-dash-board.component';
 import { AuthGuard } from './core/auth.guard';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { SuccessComponent } from './success/success.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'landing', component: LandingPageComponent, },
   { path: 'registration', component: RegistrationComponent},
   { path: 'dashboard', component: StudentDashBoardComponent, canActivate: [AuthGuard]},
+  { path: 'datasuccess', component: SuccessComponent},
   { path:'**', component : NotfoundComponent}
 ];
 

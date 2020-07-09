@@ -49,3 +49,14 @@ table {
     border-radius: 20px;
 
 }
+
+.tp-margin {
+    margin: 0 10px;
+ }
+
+ .grade{
+     padding: 7px;
+     border: 1px solid white;
+     border-radius: 3px;
+     background-color: rgba(0, 0, 0, 0.3);
+ }

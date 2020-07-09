@@ -20,18 +20,8 @@ export class AuthenticationService {
   details: any;
 
 
-  userDisplay : string;
-  userProfileName: string;
-
- 
-  
-  defaultDatabase: firebase.database.Database;
   userId: any;
 
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null) ? true : false;
-  }
 
 
   constructor( public afAuth: AngularFireAuth, public afs: AngularFirestore, public router : Router, public ngZone : NgZone) {
@@ -50,6 +40,10 @@ export class AuthenticationService {
 
 
 
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return (user !== null) ? true : false;
+  }
  
 
   SignUp(value) {
@@ -64,7 +58,7 @@ export class AuthenticationService {
         success.user.updateProfile({
           displayName: value.name
         }).then(res => {
-          this.writeUserData(newuser)
+          this.saveUserData(newuser)
           
           this.router.navigate(['/dashboard']);
           resolve(res);
@@ -75,14 +69,9 @@ export class AuthenticationService {
     })
   } 
 
-  writeUserData(newuser: { name: string; uid: string; email: string; }) {
+  saveUserData(newuser: { name: string; uid: string; email: string; }) {
     firebase.database().ref("users/"+ newuser.uid).set(newuser).catch( error =>
       console.log("Error message " + error.message));
-  }
-
-  getMeNow(){
-    let nature = "Molly Dollu Pillow"
-    return nature
   }
 
  

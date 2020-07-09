@@ -5,7 +5,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { FirebaseUserModel } from '../FirebaseUserModel';
 import { Router } from '@angular/router';
 import { GradeserviceService } from '../gradeservice.service';
-import { Result } from '../result.model';
 
 @Component({
   selector: 'app-student-dash-board',
@@ -16,6 +15,7 @@ export class StudentDashBoardComponent implements OnInit {
 
   firstResult: any;
   finalResult: any;
+  average: any;
   
   constructor( public authService: AuthenticationService, private router: Router, public afauth: AngularFireAuth, public gradeService: GradeserviceService) { 
   
@@ -23,7 +23,7 @@ export class StudentDashBoardComponent implements OnInit {
 
    sendResults(form){
     this.gradeService.submitGrades(form.value)
-      // aler("Subjects Submitted Successfully");
+    this.router.navigate(['datasuccess'])
    }
 
    logOut(){
@@ -33,7 +33,18 @@ export class StudentDashBoardComponent implements OnInit {
    getId(id){
      //console.log(id)
      this.getGrades(id)
+     this.displayAverage(id)
    }
+
+
+  displayAverage(id: any) {
+    return new Promise((resolve, reject) => {
+      firebase.database().ref("users").child(id).child("grades").child("average").once('value', data => {
+        this.average = data.val()
+        resolve(this.average)
+      }, error => reject(error))
+    })
+  }
 
   getGrades(id: any) {
     return new Promise((resolve, reject) =>{
@@ -43,6 +54,8 @@ export class StudentDashBoardComponent implements OnInit {
       }, error => reject(error))
     })
   }
+  
+  
 
   
   ngOnInit(): void {
@@ -51,7 +64,10 @@ export class StudentDashBoardComponent implements OnInit {
 
     console.log("The detail are here")
 
-    
+    this.gradeService.getAverageValue
+    this.average = this.gradeService.average
+    console.log(this.average)
+  
 
 
   

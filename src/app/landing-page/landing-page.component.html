@@ -16,19 +16,19 @@
 
             <div id="landing-div-login" class="col-md-6">
                 <!-- Default form login -->
-                <form class="text-center" id="login-form"  #myform="ngForm" (ngSubmit)="login(myform)">
+                <form class="text-center" id="login-form"  #myform="ngForm" (ngSubmit)="startLog(myform)">
 
                     <p class="h4 mb-4">Sign in</p>
 
                     <!-- Email -->
                     <!-- <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail"> -->
                     <div class="formGroup">
-                        <input type="email" id="name" name="email" class="form-control" placeholder="Email..."  ngModel required>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Email..."  ngModel required>
                     </div>
 
                     <!-- Password -->
                     <div class="formGroup">
-                        <input type="password" id="defaultLoginFormPassword" class="form-control mb-4"
+                        <input type="password" id="defaultLoginFormPassword" name="password" class="form-control mb-4"
                         placeholder="Password"  ngModel required>
                     </div>
                     

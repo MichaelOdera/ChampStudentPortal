@@ -11,7 +11,7 @@
         </div>
         <hr>
         <div>
-            <button class="btn btn-primary">Log out</button>
+            <button class="btn btn-primary" (click)="logOut()">Log out</button>
         </div>
         <hr>
 
@@ -19,12 +19,13 @@
             <h3>Average Grade: </h3>
             <h3>Rank: </h3>
         </div>
+        <div *ngIf="getId(authService.userData.uid)"></div>
 
         <hr>
-        <div id="individual-grades">
+        <div id="individual-grades" *ngIf="firstResult">
             <h2 style="background-color: rgba(0, 0, 0, 0.6); color: white; text-align: center;">Results</h2>
             <table class="table">
-                <thead style="color: white; font-size: 20px; padding: 50px;" class="black">
+                <thead style="color: white; font-size: 20px; padding: 50px;"  class="black">
                     <tr>
                         <th scope="col" style="font-size: 15px;">#</th>
                         <th scope="col" style="font-size: 15px;">Subject</th>
@@ -35,37 +36,37 @@
                     <tr>
                         <th scope="row">1</th>
                         <td style="color: white;font-size: 15px;">Informatics</td>
-                        <td style="color: white;font-size: 15px;">94</td>
+                        <td style="color: white;font-size: 15px;" >{{ firstResult.subject1 }}</td>
                     </tr>
                     <tr >
                         <th scope="row">2</th>
                         <td style="color: white;font-size: 15px;">Object Oriented Programming</td>
-                        <td style="color: white;font-size: 15px;">90</td>
+                        <td style="color: white;font-size: 15px;">{{ firstResult.subject2 }}</td>
                     </tr>
                     <tr>
                         <th scope="row">3</th>
                         <td style="color: white;font-size: 15px;">Statistics</td>
-                        <td style="color: white;font-size: 15px;">87</td>
+                        <td style="color: white;font-size: 15px;">{{ firstResult.subject3 }}</td>
                     </tr>
                     <tr>
                         <th scope="row">4</th>
                         <td style="color: white; font-size: 15px;">Calculus</td>
-                        <td style="color: white; font-size: 15px;">97</td>
+                        <td style="color: white; font-size: 15px;">{{ firstResult.subject4 }}</td>
                     </tr>
                     <tr>
                         <th scope="row">5</th>
                         <td style="color: white;font-size: 15px;">Computational Systems</td>
-                        <td style="color: white;font-size: 15px;">92</td>
+                        <td style="color: white;font-size: 15px;">{{ firstResult.subject5 }}</td>
                     </tr>
                     <tr>
                         <th scope="row">6</th>
                         <td style="color: white;font-size: 15px;">Algorithms</td>
-                        <td style="color: white;font-size: 15px;">99</td>
+                        <td style="color: white;font-size: 15px;">{{ firstResult.subject6 }}</td>
                     </tr>
                     <tr>
                         <th scope="row">7</th>
                         <td style="color: white;font-size: 15px;">Electronics</td>
-                        <td style="color: white;font-size: 15px;">90</td>
+                        <td style="color: white;font-size: 15px;">{{ firstResult.subject7 }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -77,7 +78,7 @@
         <h1>Enter your Grades for Each Corresponding Subject</h1>
 
         <!-- Default auto-sizing form -->
-        <form class="mdb-form text-center">
+        <form class="mdb-form text-center"  #resultForm="ngForm" (ngSubmit)="sendResults(resultForm)">
             <!-- Grid row -->
             <div class="row first-subject">
                 <!-- Grid column -->
@@ -91,7 +92,7 @@
                     <!-- Default input -->
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
-                        <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="Grade">
+                        <input type="number" name="firstsubject" class="form-control" id="inlineFormInputGroup" placeholder="Grade" ngModel required>
                     </div>
                 </div>
 
@@ -110,7 +111,7 @@
                     <!-- Default input -->
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
-                        <input type="number" class="form-control py-0" id="inlineFormInputGroup" placeholder="Grade">
+                        <input type="number" name="secondsubject" class="form-control py-0" id="inlineFormInputGroup" placeholder="Grade" ngModel required>
                     </div>
                 </div>
                 <!-- Grid column -->
@@ -131,7 +132,7 @@
                     <!-- Default input -->
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
-                        <input type="number" class="form-control py-0" id="inlineFormInputGroup" placeholder="Grade">
+                        <input type="number" name="thirdsubject" class="form-control py-0" id="inlineFormInputGroup" placeholder="Grade" ngModel required>
                     </div>
                 </div>
                 <!-- Grid column -->
@@ -152,7 +153,7 @@
                     <!-- Default input -->
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
-                        <input type="number" class="form-control py-0" id="inlineFormInputGroup" placeholder="Grade">
+                        <input type="number" name="fourthsubject" class="form-control py-0" id="inlineFormInputGroup" placeholder="Grade" ngModel required>
                     </div>
                 </div>
 
@@ -170,7 +171,7 @@
                     <!-- Default input -->
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
-                        <input type="number" class="form-control py-0" id="inlineFormInputGroup" placeholder="Grade">
+                        <input type="number" name="fifthsubject" class="form-control py-0" id="inlineFormInputGroup" placeholder="Grade" ngModel required>
                     </div>
                 </div>
 
@@ -188,7 +189,7 @@
                     <!-- Default input -->
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
-                        <input type="number" class="form-control py-0" id="inlineFormInputGroup" placeholder="Grade">
+                        <input type="number" name="sixthsubject" class="form-control py-0" id="inlineFormInputGroup" placeholder="Grade" ngModel required>
                     </div>
                 </div>
 
@@ -206,7 +207,7 @@
                     <!-- Default input -->
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
-                        <input type="number" class="form-control py-0" id="inlineFormInputGroup" placeholder="Grade">
+                        <input type="number" name="seventhsubject" class="form-control py-0" id="inlineFormInputGroup" placeholder="Grade" ngModel required>
                     </div>
                 </div>
                 <!-- Grid column -->

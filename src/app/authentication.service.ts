@@ -4,6 +4,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
+import { rejects } from 'assert';
+
 
 
 
@@ -24,6 +26,7 @@ export class AuthenticationService {
  
   
   defaultDatabase: firebase.database.Database;
+  userId: any;
 
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -46,18 +49,6 @@ export class AuthenticationService {
    }
 
 
-  getUserDetails(){
-    this.userProfileName = ""
-    //this.userDisplayName = this.router.getCurrentNavigation().extras.state.example; 
-    return this.afAuth.onAuthStateChanged(user => {
-        firebase.database().ref('users/'+user.uid).once("value", snap=>{
-          console.log(snap.val())
-          this.userData =  snap.val()
-          console.log("My User Name"+this.userProfileName) 
-        })
-    })
-  }
-
 
  
 
@@ -75,7 +66,7 @@ export class AuthenticationService {
         }).then(res => {
           this.writeUserData(newuser)
           
-          this.router.navigate(['/dashboard'], { state: { example: newuser.name } });
+          this.router.navigate(['/dashboard']);
           resolve(res);
         })
         
@@ -89,26 +80,27 @@ export class AuthenticationService {
       console.log("Error message " + error.message));
   }
 
-
+  getMeNow(){
+    let nature = "Molly Dollu Pillow"
+    return nature
+  }
 
  
 
   SignIn(value) {
-    return this.afAuth.signInWithEmailAndPassword(value.email, value.password)
-      .then((_result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
-        })
-      }).catch((error) => {
-        window.alert(error.message)
-      })
+    return new Promise<any>((resolve, reject) => {
+      firebase.auth().signInWithEmailAndPassword(value.email, value.password).then(success => {
+        this.router.navigate(['/dashboard']);
+        resolve(success)
+      }, error => reject(error))
+    })
   }
 
   logout() {
     this.afAuth
       .signOut().then(() => {
         localStorage.removeItem('user');
-        this.router.navigate(['login']);
+        this.router.navigate(['landing']);
       });
   }
 

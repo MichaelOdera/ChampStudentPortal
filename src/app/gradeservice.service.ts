@@ -84,11 +84,36 @@ export class GradeserviceService {
     let firstDivsionResult = (sumTotal/length);
     this.average =Math.round(firstDivsionResult*100)/100
     this.saveAverageToFirebase(this.average)
+    this.getRank(this.average)
     return this.average
+  }
+
+  
+  getRank(average: any) {
+    let rankItem = "";
+    if(average > 69 && average < 101){
+      rankItem = "Excellent"
+    }
+    if(average > 59 && average < 70 ){
+      rankItem = "Good"
+    }
+    if(average > 45 && average < 60){
+      rankItem = "Fair"
+    }
+    if(average > 40 && average < 46){
+      rankItem = "Pass"
+    }
+    if(average >= 0 && average < 40){
+      rankItem = "Fail"
+    }
+
+    firebase.database().ref("users/").child(this.userData.uid).child("grades").child("rank").set(rankItem)
   }
   
   saveAverageToFirebase(average: any) {
     firebase.database().ref("users/").child(this.userData.uid).child("grades").child("average").set(average)
+    
+    return this.angularfire.collection("users").doc('grades').set(average)
   }
 
 

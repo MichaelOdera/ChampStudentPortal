@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StorageServiceModule } from 'ngx-webstorage-service';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 import { AngularFireModule } from "@angular/fire";
@@ -49,6 +50,7 @@ import { SuccessComponent } from './success/success.component';
     BrowserAnimationsModule,
     AngularFireDatabaseModule,
     FormsModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
     NgProgressModule.forRoot(),
     NgProgressHttpClientModule,

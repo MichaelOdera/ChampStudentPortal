@@ -16,6 +16,9 @@ export class StudentDashBoardComponent implements OnInit {
   firstResult: any;
   finalResult: any;
   average: any;
+  snapshot: any;
+
+  grades:any;
   
   constructor( public authService: AuthenticationService, private router: Router, public afauth: AngularFireAuth, public gradeService: GradeserviceService) { 
   
@@ -54,17 +57,27 @@ export class StudentDashBoardComponent implements OnInit {
       }, error => reject(error))
     })
   }
+
+  getUsers(){
+    return new Promise((resolve, reject) => {
+      firebase.database().ref("users").on('child_added', snap=>{
+      console.log(snap.val().grades)
+      this.grades = snap.val().grades
+      console.log(this.grades)
+      resolve(this.grades)
+    }, error => reject(error))
+    })
+    
+  }
+
   
   
 
   
   ngOnInit(): void {
-
+    console.log(this.grades)
+    console.log("Listed Already")
     this.gradeService.getAverageValue
-    this.average = this.gradeService.average
-    console.log(this.average)
-  }
-
-  
+  }  
 
 }

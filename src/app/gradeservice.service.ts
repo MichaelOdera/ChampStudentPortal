@@ -18,6 +18,9 @@ export class GradeserviceService {
   subject6: any;
   subject7: any;
 
+  average: any;
+  sumTotal: any;
+
   constructor(public afAuth: AngularFireAuth, public angularfire: AngularFirestore) { 
 
     this.afAuth.authState.subscribe(user => {
@@ -59,10 +62,35 @@ export class GradeserviceService {
 
     }
     firebase.database().ref("users/").child(this.userData.uid).child("grades").set(newSubjects)
+
+    this.getTotalValue(newSubjects)
     
-    //return this.subject1;
+
     return this.angularfire.collection("users/"+this.userData.uid+"/grades").add(newSubjects)
   }
+  getTotalValue(newSubjects: { subject1: any; subject2: any; subject3: any; subject4: any; subject5: any; subject6: any; subject7: any; }) {
+    let values = Object.values(newSubjects)
+    this.sumTotal = 0;
+    values.forEach(value => {
+      this.sumTotal = this.sumTotal + value;
+    })
+
+    this.getAverageValue(this.sumTotal, values.length)
+
+  }
+
+
+  getAverageValue(sumTotal: any, length: number) {
+    let firstDivsionResult = (sumTotal/length);
+    this.average =Math.round(firstDivsionResult*100)/100
+    this.saveAverageToFirebase(this.average)
+    return this.average
+  }
+  
+  saveAverageToFirebase(average: any) {
+    firebase.database().ref("users/").child(this.userData.uid).child("grades").child("average").set(average)
+  }
+
 
   
 

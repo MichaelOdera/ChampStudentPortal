@@ -60,17 +60,9 @@ export class StudentDashBoardComponent implements OnInit {
   
   ngOnInit(): void {
 
-    console.log(this.authService.getMeNow)    
-
-    console.log("The detail are here")
-
     this.gradeService.getAverageValue
     this.average = this.gradeService.average
     console.log(this.average)
-  
-
-
-  
   }
 
   

@@ -32,8 +32,9 @@ export class LandingPageComponent implements OnInit {
     this.isShowDiv = !this.isShowDiv;
   }
 
-  login(value){
-    this.authenticationService.SignIn(value);
+  startLog(value){
+    console.log(value.value.email)
+    this.authenticationService.SignIn(value.value);
   }
 
 

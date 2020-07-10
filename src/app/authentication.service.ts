@@ -74,7 +74,8 @@ export class AuthenticationService {
 
 
         }, err => {
-          this.showInvalidDetailsErrorDiv = !this.showInvalidDetailsErrorDiv
+          this.showAlreadyRegisteredDiv = !this.showAlreadyRegisteredDiv
+         
           reject(err)
         })
     })
@@ -105,7 +106,7 @@ export class AuthenticationService {
         this.router.navigate(['/dashboard']);
         resolve(success)
       }, error => {
-        this.showAlreadyRegisteredDiv = !this.showAlreadyRegisteredDiv
+        this.showInvalidDetailsErrorDiv = !this.showInvalidDetailsErrorDiv
         reject(error)})
     })
   }

@@ -5,6 +5,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AngularFireModule } from "@angular/fire";
@@ -29,6 +30,12 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { from } from 'rxjs';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { SuccessComponent } from './success/success.component';
+import { InquiryService } from './inquiry.service';
+import { InquirySuccessComponent } from './inquiry-success/inquiry-success.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { EmailsentconfirmationComponent } from './emailsentconfirmation/emailsentconfirmation.component';
+import { SuccessfulregistrationComponent } from './successfulregistration/successfulregistration.component';
+import { RegistrationfailComponent } from './registrationfail/registrationfail.component';
 
 
 @NgModule({
@@ -39,7 +46,12 @@ import { SuccessComponent } from './success/success.component';
     LandingPageComponent,
     NavbarComponent,
     NotfoundComponent,
-    SuccessComponent
+    SuccessComponent,
+    InquirySuccessComponent,
+    ForgotpasswordComponent,
+    EmailsentconfirmationComponent,
+    SuccessfulregistrationComponent,
+    RegistrationfailComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -49,6 +61,7 @@ import { SuccessComponent } from './success/success.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFireDatabaseModule,
+    HttpClientModule,
     FormsModule,
     MatProgressBarModule,
     ReactiveFormsModule,
@@ -58,7 +71,7 @@ import { SuccessComponent } from './success/success.component';
     NgxWebstorageModule.forRoot(),
     StorageServiceModule
   ],
-  providers: [AuthenticationService, LocalStorageService],
+  providers: [AuthenticationService, LocalStorageService, InquiryService],
   bootstrap: [AppComponent]
  
 })

@@ -1,4 +1,4 @@
-<ng-progress></ng-progress>
+
 <div class="container-fluid" *ngIf="authService.userData as user" style="padding: 12px;">
     <div class="col-md-4" id="portfolio">
         <div class="media">
@@ -11,6 +11,7 @@
 
         </div>
         <hr>
+        <ng-progress></ng-progress>
         <div>
             <button class="btn btn-primary" (click)="logOut()">Log out</button>
         </div>
@@ -213,11 +214,12 @@
 
             </div>
             <div class="form-field">
-                <input class="btn btn-info btn-xlg" type="submit" value="Submit Entries" style="width: 50%;"
+                <input class="btn btn-info btn-xlg" (click)="showLoader()" type="submit" value="Submit Entries" style="width: 50%;"
                     mat-raised-button>
             </div>
 
         </form>
         <!-- Default auto-sizing form -->
+        <div class="loader" *ngIf="show"></div>
     </div>
 </div>

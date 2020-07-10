@@ -19,9 +19,14 @@ export class StudentDashBoardComponent implements OnInit {
   snapshot: any;
 
   grades:any;
+  show: boolean = false;
   
   constructor( public authService: AuthenticationService, private router: Router, public afauth: AngularFireAuth, public gradeService: GradeserviceService) { 
   
+   }
+
+   showLoader(){
+     this.show = !this.show;
    }
 
    sendResults(form){

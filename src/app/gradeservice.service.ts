@@ -88,7 +88,7 @@ export class GradeserviceService {
     return this.average
   }
 
-  
+
   getRank(average: any) {
     let rankItem = "";
     if(average > 69 && average < 101){
@@ -112,8 +112,11 @@ export class GradeserviceService {
   
   saveAverageToFirebase(average: any) {
     firebase.database().ref("users/").child(this.userData.uid).child("grades").child("average").set(average)
+    var averageMe = {
+      gradeGiven : average  
+    }
     
-    return this.angularfire.collection("users").doc('grades').set(average)
+    return this.angularfire.collection("users").doc("grades").set(averageMe)
   }
 
 

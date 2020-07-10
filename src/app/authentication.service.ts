@@ -45,13 +45,12 @@ export class AuthenticationService {
 
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null) ? true : false;
+    return (this.userData == null) ? false : true;
   }
 
 
+
   SignUp(value) {
-    // var promise = auth.createUserWithEmailAndPassword(email, pass); promise.then(function (user) {
-    //   user.sendEmailVerification().then(function () { }
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
         .then(success => {
@@ -60,34 +59,45 @@ export class AuthenticationService {
             uid: success.user.uid,
             email: success.user.email
           }
-          success.user.sendEmailVerification().then(result => {
 
+
+          success.user.sendEmailVerification().then(result => {
+              
           })
           success.user.updateProfile({
             displayName: value.name
           }).then(res => {
             this.saveUserData(newuser)
             this.SendVerificationMail(success)
-            //this.router.navigate(['/dashboard']);
+            this.router.navigate(['registrationresponse']);
             resolve(res);
           })
 
 
+
+
+
         }, err => {
           this.showAlreadyRegisteredDiv = !this.showAlreadyRegisteredDiv
-         
+
           reject(err)
         })
     })
   }
-  
+
+  writeUserData(newuser: { name: string; uid: string; email: string; }) {
+    firebase.database().ref("/users" + newuser.uid).set(newuser).catch(error =>
+      console.log("Error message " + error.message));
+  }
+
   SendVerificationMail(success: firebase.auth.UserCredential) {
     return new Promise((resolve, reject) => {
       success.user.sendEmailVerification().then( res => {
         this.router.navigate(['registrationresponse']);
         resolve(res)
       }, error => {
-        this.router.navigate(['registrationfail']);
+        this.router.navigate(['registrationresponse']);
+        //this.router.navigate(['registrationfail']);
         reject(error)
       })
     })
@@ -107,7 +117,8 @@ export class AuthenticationService {
         resolve(success)
       }, error => {
         this.showInvalidDetailsErrorDiv = !this.showInvalidDetailsErrorDiv
-        reject(error)})
+        reject(error)
+      })
     })
   }
 

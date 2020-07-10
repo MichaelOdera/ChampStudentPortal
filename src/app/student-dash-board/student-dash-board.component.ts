@@ -63,17 +63,7 @@ export class StudentDashBoardComponent implements OnInit {
     })
   }
 
-  getUsers(){
-    return new Promise((resolve, reject) => {
-      firebase.database().ref("users").on('child_added', snap=>{
-      console.log(snap.val().grades)
-      this.grades = snap.val().grades
-      console.log(this.grades)
-      resolve(this.grades)
-    }, error => reject(error))
-    })
-    
-  }
+ 
 
   
   
@@ -81,7 +71,6 @@ export class StudentDashBoardComponent implements OnInit {
   
   ngOnInit(): void {
     console.log(this.grades)
-    console.log("Listed Already")
     this.gradeService.getAverageValue
   }  
 

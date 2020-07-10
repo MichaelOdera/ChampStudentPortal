@@ -15,16 +15,19 @@ import { rejects } from 'assert';
 })
 export class AuthenticationService {
   userData: any;
-  user : Observable<firebase.User>;
+  user: Observable<firebase.User>;
 
   details: any;
 
 
   userId: any;
 
+  showInvalidDetailsErrorDiv: boolean = false;
+  showAlreadyRegisteredDiv: boolean = false;
 
 
-  constructor( public afAuth: AngularFireAuth, public afs: AngularFirestore, public router : Router, public ngZone : NgZone) {
+
+  constructor(public afAuth: AngularFireAuth, public afs: AngularFirestore, public router: Router, public ngZone: NgZone) {
 
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -36,7 +39,7 @@ export class AuthenticationService {
         JSON.parse(localStorage.getItem('user'));
       }
     })
-   }
+  }
 
 
 
@@ -44,44 +47,66 @@ export class AuthenticationService {
     const user = JSON.parse(localStorage.getItem('user'));
     return (user !== null) ? true : false;
   }
- 
+
 
   SignUp(value) {
+    // var promise = auth.createUserWithEmailAndPassword(email, pass); promise.then(function (user) {
+    //   user.sendEmailVerification().then(function () { }
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-      .then(success => {
-        var newuser = {
-          name: value.name,
-          uid: success.user.uid,
-          email: success.user.email
-      }
-        success.user.updateProfile({
-          displayName: value.name
-        }).then(res => {
-          this.saveUserData(newuser)
-          
-          this.router.navigate(['/dashboard']);
-          resolve(res);
+        .then(success => {
+          var newuser = {
+            name: value.name,
+            uid: success.user.uid,
+            email: success.user.email
+          }
+          success.user.sendEmailVerification().then(result => {
+
+          })
+          success.user.updateProfile({
+            displayName: value.name
+          }).then(res => {
+            this.saveUserData(newuser)
+            this.SendVerificationMail(success)
+            //this.router.navigate(['/dashboard']);
+            resolve(res);
+          })
+
+
+        }, err => {
+          this.showInvalidDetailsErrorDiv = !this.showInvalidDetailsErrorDiv
+          reject(err)
         })
-        
-        
-      }, err => reject(err))
     })
-  } 
+  }
+  
+  SendVerificationMail(success: firebase.auth.UserCredential) {
+    return new Promise((resolve, reject) => {
+      success.user.sendEmailVerification().then( res => {
+        this.router.navigate(['registrationresponse']);
+        resolve(res)
+      }, error => {
+        this.router.navigate(['registrationfail']);
+        reject(error)
+      })
+    })
+  }
 
   saveUserData(newuser: { name: string; uid: string; email: string; }) {
-    firebase.database().ref("users/"+ newuser.uid).set(newuser).catch( error =>
+    firebase.database().ref("users/" + newuser.uid).set(newuser).catch(error =>
       console.log("Error message " + error.message));
   }
 
- 
+
 
   SignIn(value) {
     return new Promise<any>((resolve, reject) => {
-      firebase.auth().signInWithEmailAndPassword(value.email, value.password).then(success => {
+      firebase.auth().signInWithEmailAndPassword(value.useremail, value.password).then(success => {
         this.router.navigate(['/dashboard']);
         resolve(success)
-      }, error => reject(error))
+      }, error => {
+        this.showAlreadyRegisteredDiv = !this.showAlreadyRegisteredDiv
+        reject(error)})
     })
   }
 
@@ -94,7 +119,17 @@ export class AuthenticationService {
   }
 
 
-  
+  ForgotPassword(passwordResetEmail) {
+    return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
+      .then(() => {
+        this.router.navigate(['emailsent'])
+      }).catch((error) => {
+        window.alert(error)
+      })
+  }
+
+
+
 }
 
 

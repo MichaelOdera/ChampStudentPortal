@@ -6,6 +6,11 @@ import { StudentDashBoardComponent } from './student-dash-board/student-dash-boa
 import { AuthGuard } from './core/auth.guard';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { SuccessComponent } from './success/success.component';
+import { InquirySuccessComponent } from './inquiry-success/inquiry-success.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { EmailsentconfirmationComponent } from './emailsentconfirmation/emailsentconfirmation.component';
+import { SuccessfulregistrationComponent } from './successfulregistration/successfulregistration.component';
+import { RegistrationfailComponent } from './registrationfail/registrationfail.component';
 
 
 const routes: Routes = [
@@ -14,6 +19,11 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
   { path: 'dashboard', component: StudentDashBoardComponent, canActivate: [AuthGuard]},
   { path: 'datasuccess', component: SuccessComponent},
+  { path: 'inquirysuccess', component: InquirySuccessComponent},
+  { path: 'passwordreset', component: ForgotpasswordComponent},
+  { path: 'emailsent', component: EmailsentconfirmationComponent},
+  { path: 'registrationresponse', component: SuccessfulregistrationComponent},
+  { path: 'registrationfail', component: RegistrationfailComponent},
   { path:'**', component : NotfoundComponent}
 ];
 

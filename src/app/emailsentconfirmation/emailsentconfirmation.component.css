@@ -13,6 +13,10 @@
     flex-direction: column;
 }
 
+.success-overlay div{
+    margin-left: 100px;
+}
+
 h1 {
     color: white;
 }

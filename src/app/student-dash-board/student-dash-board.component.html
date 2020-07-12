@@ -77,7 +77,8 @@
     </div>
 
     <div class="col-lg-8 text-center" id="grades">
-        <h1>Enter your Grades for Each Corresponding Subject</h1>
+        <h1 class="text-center">Enter your Grades for Each Corresponding Subject</h1>
+        <div *ngIf="gradeService.showNullResultMessage" role="alert" class="alert alert-danger text-center">Please ensure that all your results are filled in Correctly</div>
 
         <!-- Default auto-sizing form -->
         <form class="mdb-form text-center" #resultForm="ngForm" (ngSubmit)="sendResults(resultForm)">

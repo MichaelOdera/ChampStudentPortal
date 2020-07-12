@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app'
 import { Subject } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ValueTransformer } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class GradeserviceService {
 
   average: any;
   sumTotal: any;
+  showNullResultMessage: boolean = false;
 
   constructor(public afAuth: AngularFireAuth, public angularfire: AngularFirestore) { 
 
@@ -61,6 +63,13 @@ export class GradeserviceService {
       subject7 : value.seventhsubject
 
     }
+    let trueValues = Object.values(newSubjects)
+    trueValues.forEach( value => {
+      if(value == null || value < 0 || value > 100){
+        this.showNullResultMessage = !this.showNullResultMessage
+        return
+      }
+    })
     firebase.database().ref("users/").child(this.userData.uid).child("grades").set(newSubjects)
 
     this.getTotalValue(newSubjects)

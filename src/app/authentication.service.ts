@@ -113,8 +113,13 @@ export class AuthenticationService {
   SignIn(value) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.useremail, value.password).then(success => {
-        this.router.navigate(['/dashboard']);
-        resolve(success)
+        if(success.user.emailVerified && success.user){
+          this.router.navigate(['/dashboard']);
+          resolve(success)
+        }else {
+          this.router.navigate(['registrationfail']);
+        }
+      
       }, error => {
         this.showInvalidDetailsErrorDiv = !this.showInvalidDetailsErrorDiv
         reject(error)

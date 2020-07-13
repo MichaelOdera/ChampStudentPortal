@@ -26,7 +26,6 @@ import { RegistrationComponent } from './registration/registration.component';
 import { StudentDashBoardComponent } from './student-dash-board/student-dash-board.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AuthenticationService } from './authentication.service';
-import { NavbarComponent } from './navbar/navbar.component';
 import { from } from 'rxjs';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { SuccessComponent } from './success/success.component';
@@ -44,7 +43,6 @@ import { RegistrationfailComponent } from './registrationfail/registrationfail.c
     RegistrationComponent,
     StudentDashBoardComponent,
     LandingPageComponent,
-    NavbarComponent,
     NotfoundComponent,
     SuccessComponent,
     InquirySuccessComponent,

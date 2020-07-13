@@ -78,7 +78,9 @@
 
     <div class="col-lg-8 text-center" id="grades">
         <h1 class="text-center">Enter your Grades for Each Corresponding Subject</h1>
-        <div *ngIf="gradeService.showNullResultMessage" role="alert" class="alert alert-danger text-center">Please ensure that all your results are filled in Correctly</div>
+        <div *ngIf="gradeService.showNullResultMessage" role="alert" class="alert alert-danger text-center">Please ensure that all your results are filled in Correctly
+            <div class="loader" *ngIf="show"></div>
+        </div>
 
         <!-- Default auto-sizing form -->
         <form class="mdb-form text-center" #resultForm="ngForm" (ngSubmit)="sendResults(resultForm)">
@@ -96,7 +98,7 @@
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
                         <input type="number" name="firstsubject" class="form-control" id="inlineFormInputGroup"
-                            placeholder="Grade" ngModel required>
+                            placeholder="Grade" ngModel required min="0">
                     </div>
                 </div>
 
@@ -116,7 +118,7 @@
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
                         <input type="number" name="secondsubject" class="form-control py-0" id="inlineFormInputGroup"
-                            placeholder="Grade" ngModel required>
+                            placeholder="Grade" ngModel required min="0">
                     </div>
                 </div>
              
@@ -133,7 +135,7 @@
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
                         <input type="number" name="thirdsubject" class="form-control py-0" id="inlineFormInputGroup"
-                            placeholder="Grade" ngModel required>
+                            placeholder="Grade" ngModel required min="0">
                     </div>
                 </div>
           
@@ -153,7 +155,7 @@
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
                         <input type="number" name="fourthsubject" class="form-control py-0" id="inlineFormInputGroup"
-                            placeholder="Grade" ngModel required>
+                            placeholder="Grade" ngModel required min="0">
                     </div>
                 </div>
 
@@ -172,7 +174,7 @@
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
                         <input type="number" name="fifthsubject" class="form-control py-0" id="inlineFormInputGroup"
-                            placeholder="Grade" ngModel required>
+                            placeholder="Grade" ngModel required min="0">
                     </div>
                 </div>
 
@@ -191,7 +193,7 @@
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
                         <input type="number" name="sixthsubject" class="form-control py-0" id="inlineFormInputGroup"
-                            placeholder="Grade" ngModel required>
+                            placeholder="Grade" ngModel required min="0">
                     </div>
                 </div>
 
@@ -208,7 +210,7 @@
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
                         <input type="number" name="seventhsubject" class="form-control py-0" id="inlineFormInputGroup"
-                            placeholder="Grade" ngModel required>
+                            placeholder="Grade" ngModel required min="0">
                     </div>
                 </div>
                
@@ -221,6 +223,6 @@
 
         </form>
         <!-- Default auto-sizing form -->
-        <div class="loader" *ngIf="show"></div>
+        
     </div>
 </div>

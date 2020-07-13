@@ -1,4 +1,4 @@
-.container{
+.container-fluid{
     margin: 3%;
 }
 
@@ -11,6 +11,10 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.success-overlay div{
+    margin-left: 100px;
 }
 
 h1 {

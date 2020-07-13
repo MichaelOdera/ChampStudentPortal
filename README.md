@@ -1,5 +1,7 @@
 # StudentDashboard
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/585f49e4df5a4872972d2ac6bfc00552)](https://app.codacy.com/manual/MichaelOdera/ChampStudentPortal?utm_source=github.com&utm_medium=referral&utm_content=MichaelOdera/ChampStudentPortal&utm_campaign=Badge_Grade_Settings)
+
 This project was created by [Michael Ochieng' Odera](https://www.linkedin.com/in/michael-odera-02541485/) using AngularJS, Typescript and [Angular CLI](https://github.com/angular/angular-cli) version 9.1.4.
 
 ## Project Live Link

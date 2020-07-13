@@ -31,7 +31,7 @@ export class StudentDashBoardComponent implements OnInit {
 
    sendResults(form){
     this.gradeService.submitGrades(form.value)
-    this.router.navigate(['datasuccess'])
+   
    }
 
    logOut(){
@@ -71,6 +71,7 @@ export class StudentDashBoardComponent implements OnInit {
   
   ngOnInit(): void {
     this.gradeService.getAverageValue
+    this.gradeService.showNullResultMessage = false;
   }  
 
 }

@@ -1,2 +1,228 @@
-<p>student-dash-board works!</p>
-<p>Welcome : {{ username }}</p>
+
+<div class="container-fluid" *ngIf="authService.userData as user" style="padding: 12px;">
+    <div class="col-md-4" id="portfolio">
+        <div class="media">
+            <img class="align-self-start mr-5 img-thumbnail rounded-circle"
+                src="{{(user.photoURL) ? user.photoURL : '/assets/user-avatar.jpg'}}" alt="{{user.displayName}}">
+            <div class="media-body">
+                <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'Super Admin'}}</strong></h1>
+                <p>Email: <strong>{{user.email}}</strong></p>
+            </div>
+
+        </div>
+        <hr>
+        <ng-progress></ng-progress>
+        <div>
+            <button class="btn btn-primary" (click)="logOut()">Log out</button>
+        </div>
+        <hr>
+
+
+        <div *ngIf="getId(authService.userData.uid)"></div>
+        <div class="grade" *ngIf="firstResult">
+            <h3>Average Grade: <span class="grading">{{ firstResult.average }}</span></h3>
+            <h3>Rank: <span class="grading">{{ firstResult.rank }}</span></h3>
+        </div>
+        <hr>
+        <div id="individual-grades" *ngIf="firstResult">
+            <h2 style="background-color: rgba(0, 0, 0, 0.6); color: white; text-align: center;">Results</h2>
+            <table class="table">
+                <thead style="color: white; font-size: 20px; padding: 50px;" class="black">
+                    <tr>
+                        <th scope="col" style="font-size: 15px;">#</th>
+                        <th scope="col" style="font-size: 15px;">Subject</th>
+                        <th scope="col" style="font-size: 15px;">Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td style="color: white;font-size: 15px;">Informatics</td>
+                        <td style="color: white;font-size: 15px;">{{ firstResult.subject1 }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td style="color: white;font-size: 15px;">Object Oriented Programming</td>
+                        <td style="color: white;font-size: 15px;">{{ firstResult.subject2 }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td style="color: white;font-size: 15px;">Statistics</td>
+                        <td style="color: white;font-size: 15px;">{{ firstResult.subject3 }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td style="color: white; font-size: 15px;">Calculus</td>
+                        <td style="color: white; font-size: 15px;">{{ firstResult.subject4 }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td style="color: white;font-size: 15px;">Computational Systems</td>
+                        <td style="color: white;font-size: 15px;">{{ firstResult.subject5 }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">6</th>
+                        <td style="color: white;font-size: 15px;">Algorithms</td>
+                        <td style="color: white;font-size: 15px;">{{ firstResult.subject6 }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">7</th>
+                        <td style="color: white;font-size: 15px;">Electronics</td>
+                        <td style="color: white;font-size: 15px;">{{ firstResult.subject7 }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="col-lg-8 text-center" id="grades">
+        <h1 class="text-center">Enter your Grades for Each Corresponding Subject</h1>
+        <div *ngIf="gradeService.showNullResultMessage" role="alert" class="alert alert-danger text-center">Please ensure that all your results are filled in Correctly
+            <div class="loader" *ngIf="show"></div>
+        </div>
+
+        <!-- Default auto-sizing form -->
+        <form class="mdb-form text-center" #resultForm="ngForm" (ngSubmit)="sendResults(resultForm)">
+            <!-- Grid row -->
+            <div class="row first-subject">
+                <!-- Grid column -->
+                <div class="col-md-7">
+                    <p style="background-color: rgba(0, 0, 0, 0.6); padding: 5px;">Informatics</p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-auto">
+                    <!-- Default input -->
+                    <label class="sr-only" for="inlineFormInputGroup">Grade</label>
+                    <div class="input-group mb-2">
+                        <input type="number" name="firstsubject" class="form-control" id="inlineFormInputGroup"
+                            placeholder="Grade" ngModel required min="0">
+                    </div>
+                </div>
+
+            </div>
+            <!-- Grid row -->
+
+            <div class="row second-subject">
+                <!-- Grid column -->
+                <div class="col-md-7">
+                    <p style="background-color: rgba(0, 0, 0, 0.6); padding: 5px;">Object Oriented Programming</p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-auto">
+                    <!-- Default input -->
+                    <label class="sr-only" for="inlineFormInputGroup">Grade</label>
+                    <div class="input-group mb-2">
+                        <input type="number" name="secondsubject" class="form-control py-0" id="inlineFormInputGroup"
+                            placeholder="Grade" ngModel required min="0">
+                    </div>
+                </div>
+             
+            </div>
+
+
+            <div class="row third-subject">
+                <!-- Grid column -->
+                <div class="col-md-7">
+                    <p style="background-color: rgba(0, 0, 0, 0.6); padding: 5px;">Statistics</p>
+                </div>
+             
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Grade</label>
+                    <div class="input-group mb-2">
+                        <input type="number" name="thirdsubject" class="form-control py-0" id="inlineFormInputGroup"
+                            placeholder="Grade" ngModel required min="0">
+                    </div>
+                </div>
+          
+
+            </div>
+
+            <div class="row fourth-subject">
+                <!-- Grid column -->
+                <div class="col-md-7">
+                    <p style="background-color: rgba(0, 0, 0, 0.6); padding: 5px;">Calculus</p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-auto">
+                    <!-- Default input -->
+                    <label class="sr-only" for="inlineFormInputGroup">Grade</label>
+                    <div class="input-group mb-2">
+                        <input type="number" name="fourthsubject" class="form-control py-0" id="inlineFormInputGroup"
+                            placeholder="Grade" ngModel required min="0">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row fifth-subject">
+                <!-- Grid column -->
+                <div class="col-md-7">
+                    <p style="background-color: rgba(0, 0, 0, 0.6); padding: 5px;">Computational Systems</p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-auto">
+                    <!-- Default input -->
+                    <label class="sr-only" for="inlineFormInputGroup">Grade</label>
+                    <div class="input-group mb-2">
+                        <input type="number" name="fifthsubject" class="form-control py-0" id="inlineFormInputGroup"
+                            placeholder="Grade" ngModel required min="0">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row sixth-subject">
+                <!-- Grid column -->
+                <div class="col-md-7">
+                    <p style="background-color: rgba(0, 0, 0, 0.6); padding: 5px;">Algorithms</p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-auto">
+                    <!-- Default input -->
+                    <label class="sr-only" for="inlineFormInputGroup">Grade</label>
+                    <div class="input-group mb-2">
+                        <input type="number" name="sixthsubject" class="form-control py-0" id="inlineFormInputGroup"
+                            placeholder="Grade" ngModel required min="0">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row seventh-subject">
+                <!-- Grid column -->
+                <div class="col-md-7">
+                    <p style="background-color: rgba(0, 0, 0, 0.6); padding: 5px;">Electronics</p>
+                </div>
+             
+                <div class="col-auto">
+                    <!-- Default input -->
+                    <label class="sr-only" for="inlineFormInputGroup">Grade</label>
+                    <div class="input-group mb-2">
+                        <input type="number" name="seventhsubject" class="form-control py-0" id="inlineFormInputGroup"
+                            placeholder="Grade" ngModel required min="0">
+                    </div>
+                </div>
+               
+
+            </div>
+            <div class="form-field">
+                <input class="btn btn-info btn-xlg" (click)="showLoader()" type="submit" value="Submit Entries" style="width: 50%;"
+                    mat-raised-button>
+            </div>
+
+        </form>
+        <!-- Default auto-sizing form -->
+        
+    </div>
+</div>

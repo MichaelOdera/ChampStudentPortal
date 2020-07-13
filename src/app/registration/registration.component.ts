@@ -19,18 +19,10 @@ export class RegistrationComponent implements OnInit {
     this.user = new FirebaseUserModel("", "");
   }
 
+  
+
   register(form){
     this.authService.SignUp(form.value)
-    .then(res => {
-      console.log(res);
-      this.errorMessage = "";
-      alert("Successfully Created");
-      this.successMessage = "Your account has been created";
-    }, err => {
-      console.log(err);
-      this.errorMessage = err.message;
-      this.successMessage = "";
-    })
   }
 
 

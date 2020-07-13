@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseUserModel } from '../FirebaseUserModel';
 import { AuthenticationService } from '../authentication.service';
+import * as firebase from 'firebase/app';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { FirebaseUserModel } from '../FirebaseUserModel';
+import { Router } from '@angular/router';
+import { GradeserviceService } from '../gradeservice.service';
+
 
 @Component({
   selector: 'app-student-dash-board',
@@ -9,15 +14,68 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class StudentDashBoardComponent implements OnInit {
 
-  user: FirebaseUserModel;
-  username: string;
+  firstResult: any;
+  finalResult: any;
+  average: any;
+  snapshot: any;
 
-  constructor(public authenticationService: AuthenticationService) { }
+  grades:any;
+  show: boolean = false;
+  
+  constructor( public authService: AuthenticationService, private router: Router, public afauth: AngularFireAuth, public gradeService: GradeserviceService) { 
+  
+   }
 
-  ngOnInit(): void {
-    this.authenticationService.getUserProfile()
-    this.user = this.authenticationService.firebaseuser
-    this.username = this.user.name
+   showLoader(){
+     this.show = !this.show;
+   }
+
+   sendResults(form){
+    this.gradeService.submitGrades(form.value)
+   
+   }
+
+   logOut(){
+     this.authService.logout()
+   }
+
+   getId(id){
+     //console.log(id)
+     this.getGrades(id)
+     this.displayAverage(id)
+   }
+
+
+  displayAverage(id: any) {
+    return new Promise((resolve, reject) => {
+      firebase.database().ref("users").child(id).child("grades").child("average").once('value', data => {
+        this.average = data.val()
+        resolve(this.average)
+      }, error => reject(error))
+    })
   }
+
+
+
+
+  getGrades(id: any) {
+    return new Promise((resolve, reject) =>{
+      firebase.database().ref("users").child(id).child("grades").once('value', data => {
+          this.firstResult = data.val()
+          resolve(this.firstResult)
+      }, error => reject(error))
+    })
+  }
+
+ 
+
+  
+  
+
+  
+  ngOnInit(): void {
+    this.gradeService.getAverageValue
+    this.gradeService.showNullResultMessage = false;
+  }  
 
 }

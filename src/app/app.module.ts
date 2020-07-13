@@ -1,7 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {NgxWebstorageModule, LocalStorageService} from 'ngx-webstorage';
 import { NgModule } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StorageServiceModule } from 'ngx-webstorage-service';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AngularFireModule } from "@angular/fire";
@@ -19,24 +23,32 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
-import { LoginComponent } from './login/login.component';
 import { StudentDashBoardComponent } from './student-dash-board/student-dash-board.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AuthenticationService } from './authentication.service';
-import { NavbarComponent } from './navbar/navbar.component';
-import { from } from 'rxjs';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { SuccessComponent } from './success/success.component';
+import { InquiryService } from './inquiry.service';
+import { InquirySuccessComponent } from './inquiry-success/inquiry-success.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { EmailsentconfirmationComponent } from './emailsentconfirmation/emailsentconfirmation.component';
+import { SuccessfulregistrationComponent } from './successfulregistration/successfulregistration.component';
+import { RegistrationfailComponent } from './registrationfail/registrationfail.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
-    LoginComponent,
     StudentDashBoardComponent,
     LandingPageComponent,
-    NavbarComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    SuccessComponent,
+    InquirySuccessComponent,
+    ForgotpasswordComponent,
+    EmailsentconfirmationComponent,
+    SuccessfulregistrationComponent,
+    RegistrationfailComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -46,13 +58,17 @@ import { NotfoundComponent } from './notfound/notfound.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFireDatabaseModule,
+    HttpClientModule,
     FormsModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
     NgProgressModule.forRoot(),
     NgProgressHttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    NgxWebstorageModule.forRoot(),
+    StorageServiceModule
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, LocalStorageService, InquiryService],
   bootstrap: [AppComponent]
  
 })

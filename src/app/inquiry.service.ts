@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class InquiryService {
   sendEmail(email) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return new Promise((resolve, reject) => {
-       this.http.post('https://formspree.io/mrgawwny',
+       this.http.post(environment.inquiryURL,
       { name: email.name, _replyto: email.email, message: email.message },
       { 'headers': headers }).toPromise().then(res => {
         this.router.navigate(["inquirysuccess"])

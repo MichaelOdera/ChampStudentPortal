@@ -33,7 +33,9 @@ export class AuthenticationService {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
+        sessionStorage.user = JSON.stringify('user',this.userData.displayName);
         JSON.parse(localStorage.getItem('user'));
+        JSON.parse(sessionStorage.user);
       } else {
         localStorage.setItem('user', null);
         JSON.parse(localStorage.getItem('user'));
@@ -105,7 +107,7 @@ export class AuthenticationService {
 
   saveUserData(newuser: { name: string; uid: string; email: string; }) {
     firebase.database().ref("users/" + newuser.uid).set(newuser).catch(error =>
-      console.log("Error message " + error.message));
+      console.log("Error message: " + error.message));
   }
 
 
@@ -115,11 +117,11 @@ export class AuthenticationService {
       firebase.auth().signInWithEmailAndPassword(value.useremail, value.password).then(success => {
         if(success.user.emailVerified && success.user){
           this.router.navigate(['/dashboard']);
-          resolve(success)
+          
         }else {
           this.router.navigate(['registrationfail']);
         }
-      
+      resolve(success)
       }, error => {
         this.showInvalidDetailsErrorDiv = !this.showInvalidDetailsErrorDiv
         reject(error)

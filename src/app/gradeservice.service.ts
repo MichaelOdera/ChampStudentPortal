@@ -71,7 +71,7 @@ export class GradeserviceService {
     let sixth = value.firstsubject
     let seventh = value.firstsubject
 
-    if (first >= 0 && first <101 && second >= 0 && second <101 && third >= 0 && third < 101 && fourth >= 0 && fourth < 101 && fifth >= 0 && fifth < 101 && sixth >= 0 && sixth< 101 && seventh >=0 && seventh < 101) {
+    if (first >= 0 && first <101 && first != null&& second >= 0 && second <101 && second != null && third >= 0 && third < 101 && third != null && fourth >= 0 && fourth < 101 && fourth != null && fifth >= 0 && fifth < 101 && fifth != null && sixth >= 0 && sixth< 101 && sixth != null && seventh >=0 && seventh < 101 && seventh != null) {
       firebase.database().ref("users/").child(this.userData.uid).child("grades").set(newSubjects)
       this.getTotalValue(newSubjects)
       this.router.navigate(['datasuccess'])

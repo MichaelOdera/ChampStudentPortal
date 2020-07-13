@@ -98,7 +98,10 @@
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
                         <input type="number" name="firstsubject" class="form-control" id="inlineFormInputGroup"
-                            placeholder="Grade" ngModel required min="0">
+                            placeholder="Grade" #first='ngModel' ngModel required min="0">
+                    </div>
+                    <div [hidden]="first.valid || first.pristine" class="alert alert-danger">
+                        <p style="color: black;">This field cannot be empty</p>
                     </div>
                 </div>
 
@@ -118,7 +121,10 @@
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
                         <input type="number" name="secondsubject" class="form-control py-0" id="inlineFormInputGroup"
-                            placeholder="Grade" ngModel required min="0">
+                            placeholder="Grade" #second='ngModel' ngModel required min="0">
+                    </div>
+                    <div [hidden]="second.valid || second.pristine" class="alert alert-danger">
+                        <p style="color: black;">This field cannot be empty</p>
                     </div>
                 </div>
              
@@ -135,7 +141,10 @@
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
                         <input type="number" name="thirdsubject" class="form-control py-0" id="inlineFormInputGroup"
-                            placeholder="Grade" ngModel required min="0">
+                            placeholder="Grade" #third='ngModel' ngModel required min="0">
+                    </div>
+                    <div [hidden]="third.valid || third.pristine" class="alert alert-danger">
+                        <p style="color: black;">This field cannot be empty</p>
                     </div>
                 </div>
           
@@ -155,7 +164,10 @@
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
                         <input type="number" name="fourthsubject" class="form-control py-0" id="inlineFormInputGroup"
-                            placeholder="Grade" ngModel required min="0">
+                            placeholder="Grade" #fourth='ngModel' ngModel required min="0">
+                    </div>
+                    <div [hidden]="fourth.valid || fourth.pristine" class="alert alert-danger">
+                        <p style="color: black;">This field cannot be empty</p>
                     </div>
                 </div>
 
@@ -174,7 +186,10 @@
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
                         <input type="number" name="fifthsubject" class="form-control py-0" id="inlineFormInputGroup"
-                            placeholder="Grade" ngModel required min="0">
+                            placeholder="Grade" #fifth='ngModel' ngModel required min="0">
+                    </div>
+                    <div [hidden]="fifth.valid || fifth.pristine" class="alert alert-danger">
+                        <p style="color: black;">This field cannot be empty</p>
                     </div>
                 </div>
 
@@ -193,7 +208,10 @@
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
                         <input type="number" name="sixthsubject" class="form-control py-0" id="inlineFormInputGroup"
-                            placeholder="Grade" ngModel required min="0">
+                            placeholder="Grade" #sixth='ngModel' ngModel required min="0">
+                    </div>
+                    <div [hidden]="sixth.valid || sixth.pristine" class="alert alert-danger">
+                        <p style="color: black;">This field cannot be empty</p>
                     </div>
                 </div>
 
@@ -210,7 +228,10 @@
                     <label class="sr-only" for="inlineFormInputGroup">Grade</label>
                     <div class="input-group mb-2">
                         <input type="number" name="seventhsubject" class="form-control py-0" id="inlineFormInputGroup"
-                            placeholder="Grade" ngModel required min="0">
+                            placeholder="Grade" #seventh='ngModel' ngModel required min="0">
+                    </div>
+                    <div [hidden]="seventh.valid || seventh.pristine" class="alert alert-danger">
+                        <p style="color: black;">This field cannot be empty</p>
                     </div>
                 </div>
                

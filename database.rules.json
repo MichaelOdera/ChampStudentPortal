@@ -1,0 +1,13 @@
+{
+  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
+  "rules": {
+    "users": {
+      "$uid": {
+        // grants write access to the owner of this user account
+        // whose uid must exactly match the key ($user_id)
+        ".write": "$uid === auth.uid",
+        ".read": "auth != null && auth.uid == $uid"
+      }
+    }
+  }
+}

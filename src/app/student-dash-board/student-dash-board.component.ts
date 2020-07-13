@@ -6,6 +6,7 @@ import { FirebaseUserModel } from '../FirebaseUserModel';
 import { Router } from '@angular/router';
 import { GradeserviceService } from '../gradeservice.service';
 
+
 @Component({
   selector: 'app-student-dash-board',
   templateUrl: './student-dash-board.component.html',
@@ -53,6 +54,9 @@ export class StudentDashBoardComponent implements OnInit {
       }, error => reject(error))
     })
   }
+
+
+
 
   getGrades(id: any) {
     return new Promise((resolve, reject) =>{
